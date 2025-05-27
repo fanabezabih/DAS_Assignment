@@ -118,12 +118,12 @@
 --WHERE NOT EXISTS (
 --	SELECT 1 FROM business_manufacture.sales s WHERE s.EmployeeID = e.EmployeeID
 --);
---SELECT e.employeeId, e.first_name, e.last_Name, COUNT(s.SaleID) AS total_sales
---FROM business_manufacture.employees_table e
---LEFT JOIN business_manufacture.sales_table s ON e.EmployeeID = s.EmployeeID
---GROUP BY e.employeeId, e.first_name, e.last_Name;
---ORDER BY total_sales DESC
---LIMIT 1;
+SELECT e.EmployeeID, e.first_name, e.last_name, SUM(s.Total) AS total_sales_amount
+FROM business_manufacture.employees_table e
+JOIN business_manufacture.sales_table s ON e.EmployeeID = s.EmployeeID
+GROUP BY e.EmployeeID, e.first_name, e.last_name
+ORDER BY total_sales_amount DESC
+LIMIT 1;
 --SELECT e.department, AVG(s.Quantity) AS avg_quantity
 --FROM business_manufacture.employees_table e
 --JOIN business_manufacture.sales_table s ON e.employeeId = s.employeeId
@@ -143,10 +143,10 @@
 --FROM business_manufacture.employees_table e
 --JOIN business_manufacture.sales_table s ON e.employeeId = s.employeeId
 --GROUP BY e.department;
-SELECT s.category, SUM(s.Total) AS total_revenue
-FROM business_manufacture.sales_table s
-JOIN business_manufacture.products p ON s.ProductID = p.product_id
-GROUP BY s.category;
+--SELECT p.category, SUM(s.Total) AS total_revenue
+--FROM business_manufacture.sales_table s
+--JOIN business_manufacture.products p ON s.ProductID = p.product_id
+--GROUP BY p.category;
 
 
 
